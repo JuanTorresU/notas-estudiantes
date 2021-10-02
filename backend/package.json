@@ -1,0 +1,20 @@
+{
+  "name": "admin-estudiantes",
+  "version": "1.0.0",
+  "description": "Administra los alumnos del curso y las notas de cada alumno",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
+  },
+  "author": "Juan C. Torres",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "uuid": "^8.3.2"
+  }
+}
