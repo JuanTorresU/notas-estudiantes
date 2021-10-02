@@ -83,21 +83,24 @@ app.delete('/api/v1/students/:id',(req,res)=>{
 })
 //post - create a new student 
 app.post('/api/v1/students',(req, res) =>{
-    const student = req.body
-    console.log(student)
-    const newStudent = {
+    const studentReg = req.body
+    if(students.find(student=>student.document===studentReg.document)){
+      res.status(202).end("Error: Numero de identificacion ya esta en uso")
+    } else {
+      const newStudent = {
         id: uuidv4(),
-        complete_name:student.complete_name,
-        document:student.document,
-        age:student.age,
-        gender:student.gender,
-        note:student.note,
+        complete_name:studentReg.complete_name,
+        document:studentReg.document,
+        age:studentReg.age,
+        gender:studentReg.gender,
+        note:studentReg.note,
         autoevaluation:0
-        
+      }
+      students = [...students, newStudent]
+      console.log(students)
+      res.json(studentReg)
     }
-    students = [...students, newStudent]
-    console.log(students)
-    res.json(student)
+    
 })
 //Add note to student and add autoevaluation
 app.put('/api/v1/students/:id',(req,res)=>{
