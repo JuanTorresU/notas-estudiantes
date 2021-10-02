@@ -86,7 +86,9 @@ app.post('/api/v1/students',(req, res) =>{
     const studentReg = req.body
     if(students.find(student=>student.document===studentReg.document)){
       res.status(202).end("Error: Numero de identificacion ya esta en uso")
-    } else {
+      return
+    } 
+
       const newStudent = {
         id: uuidv4(),
         complete_name:studentReg.complete_name,
@@ -99,7 +101,7 @@ app.post('/api/v1/students',(req, res) =>{
       students = [...students, newStudent]
       console.log(students)
       res.json(studentReg)
-    }
+     
     
 })
 //Add note to student and add autoevaluation
@@ -111,19 +113,27 @@ app.put('/api/v1/students/:id',(req,res)=>{
     const id = req.params.id
     const note = req.body.note
     const autoevaluation = req.body.autoevaluation
-
+    
     if(note){
+      if (!noteVerification(note)){
+        res.status(202).end("La nota ingresada esta fuera del rango o no es un numero entero")
+        return
+      }
       students.map(student=>student.id===id?student.note=note:null)  
     }
     if(autoevaluation){
+      if (!noteVerification(autoevaluation)){
+        res.status(202).end("La nota ingresada esta fuera del rango o no es un numero entero")
+        return
+      }
       students.map(student=>student.id===id?student.autoevaluation=autoevaluation:null)  
     }
 
     console.log(students)
     res.status(200).end()
-
 })
 
+const noteVerification = note => (note>=0)&&(note<=5)&&(Number.isInteger(note))?true:false
 // Average of all students
 app.get('/api/v1/average/',(req,res)=>{
 
