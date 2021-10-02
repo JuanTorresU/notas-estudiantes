@@ -135,10 +135,13 @@ app.put('/api/v1/students/:id',(req,res)=>{
 
 const noteVerification = note => (note>=0)&&(note<=5)&&(Number.isInteger(note))?true:false
 // Average of all students
+
+
 app.get('/api/v1/average/',(req,res)=>{
 
     const avg = (students.reduce((a,b)=>({note:a.note+b.note})).note/students.length).toFixed(2)
-    res.json(avg)
+
+    res.json({promedio:avg})
 })
 
 
