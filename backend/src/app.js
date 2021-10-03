@@ -65,10 +65,10 @@ app.get('/', (req, res) => {
 /////API
 
 //get unique student
-app.get('/api/v1/students/:id',(req,res)=>{
-    const id = req.params.id
-    console.log(id)
-    res.json(students.find(student => student.id === id))
+app.get('/api/v1/students/:document',(req,res)=>{
+    const id = req.params.document
+    console.log(document)
+    res.json(students.find(student => student.document === document))
 })
 
 //get students list
