@@ -8,12 +8,14 @@ import './Admin.css'
 export default function Admin() {
     const { register, handleSubmit } = useForm()
     const [students, setStudents] = useState([])
+    const [average, setAverage] = useState(0)
 
     useEffect(()=>{
+        getNoteAvg(setAverage)
         getStudents().then(response => response.json())
         .then(result => setStudents(result))
         .catch(error => console.log('error', error));
-    },[students])
+    },[students,average])
 
     function studentRegister(newStudent){
         createStudent(newStudent)
@@ -81,6 +83,9 @@ export default function Admin() {
                     }
                 </tbody>            
             </table>
+            <div>
+                <p>Promedio total de todos los estudiantes: {average}</p>
+            </div>
                                 <Popup trigger={
                                    <button>Agregar estudiante</button>
                                 } modal nested>
@@ -89,26 +94,29 @@ export default function Admin() {
                                         <button className="close" onClick={close}> &times; </button>
 
                                         <div className="header"> Registro de estudiante  </div>
-                                            <form onSubmit={handleSubmit(studentRegister)}>
+                                            
+                                        <div className="content">
+                                        <form onSubmit={handleSubmit(studentRegister)}>
+                                        
+                                            
                                                 <label className="label">Name</label>
-                                                <input className="input" placeholder="Student name" {...register("complete_name", { required: true })} />
+                                                <input className="input" placeholder="Student name" {...register("complete_name", { required: true })} /> <br></br>
 
                                                 <label className="label">Document</label>
-                                                <input className="input" placeholder="Student name" {...register("document", { required: true })} />
+                                                <input className="input" placeholder="Student document" {...register("document", { required: true })} /> <br></br>
 
                                                 <label className="label">Age</label>
-                                                <input className="input" placeholder="Student name" {...register("age", { required: true })} />
+                                                <input className="input" placeholder="Student age" {...register("age", { required: true })} /> <br></br>
 
                                                 <label className="label">Gender</label>
-                                                <input className="input" placeholder="Student name" {...register("gender", { required: true })} />
+                                                <input className="input" placeholder="Student gender" {...register("gender", { required: true })} /> <br></br>
 
                                                 <label className="label ">Note</label>
-                                                <input className="input" placeholder="Student name" {...register("note", { required: true })} />
+                                                <input className="input" placeholder="Student note" {...register("note", { required: true })} /> <br></br>
 
                                                 <button className="button" type="submit" > Agregar </button>                        
 
                                             </form>
-                                        <div className="content">
                                         </div>
 
                                         <div className="actions">
@@ -181,26 +189,9 @@ const createStudent = (student) =>{
 }
 
 
-const putAutoevaluation = (autoevaluation) =>{
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({"autoevaluation":5});
 
-    var requestOptions = {
-    method: 'PUT',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-    };
-
-    fetch("http://localhost:3001/api/v1/students/dc2ff3b3-be00-4eb6-9332-152f6b2e2f64", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
-}
-
-const getNoteAvg = () =>{
+const getNoteAvg = (setAverage) =>{
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
@@ -208,6 +199,6 @@ const getNoteAvg = () =>{
       
       fetch("http://localhost:3001/api/v1/average", requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result => setAverage(result))
         .catch(error => console.log('error', error));
 }

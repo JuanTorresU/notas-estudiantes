@@ -51,7 +51,7 @@ let students = [
     "document": "100138",
     "age": 27,
     "gender": "Female",
-    "note": 8,
+    "note": 5,
     "autoevaluation": 0
   }
     ]

@@ -28,13 +28,14 @@ export default function Home() {
                                         <button className="close" onClick={close}> &times; </button>
 
                                         <div className="header"> Asignar autoevaluacion  </div>
-                                            <label htmlFor="document">Documento</label>
-                                            <input name="document" type="text" />
+                                            
+
+                                        <div className="content">
+                                        <label htmlFor="document">Documento</label>
+                                            <input name="document" type="text" /> <br></br>
 
                                             <label htmlFor="autoevaluation">Autoevaluacion</label>
                                             <input name="autoevaluation" type="text" />
-
-                                        <div className="content">
                                         </div>
 
                                         <div className="actions">
