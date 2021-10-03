@@ -66,7 +66,7 @@ app.get('/', (req, res) => {
 
 //get unique student
 app.get('/api/v1/students/:document',(req,res)=>{
-    const id = req.params.document
+    const document = req.params.document
     console.log(document)
     res.json(students.find(student => student.document === document))
 })
