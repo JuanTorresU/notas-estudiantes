@@ -1,0 +1,25 @@
+.home {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home__entry {
+  width: 500px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.home__entry__button {
+  color: white;
+  background-color: #4f5551;
+  width: 250px;
+  height: 50px;
+  margin: 10px;
+  font-size: 25px;
+  font-weight: 400;
+  cursor: pointer;
+}

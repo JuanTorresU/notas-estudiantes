@@ -1,9 +1,12 @@
 // const http = require('http')
+const cors = require( 'cors');
 const { response } = require('express')
 const express = require('express')
 const { v4: uuidv4 } = require('uuid');
 const app = express()
 app.use(express.json())
+app.use( cors({ origin: true, credentials: true  }) );
+
 
 let students = [
   {
